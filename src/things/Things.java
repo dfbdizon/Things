@@ -19,6 +19,7 @@ public class Things {
         System.out.println("Gwen");
         System.out.println("Faye");
         System.out.println("Gwen2");
+        System.out.println("Beedo");
         System.out.println("Orange Juice!");
         System.out.println("Finulleey!");
         System.out.println("Orange Bag!");       
