@@ -31,6 +31,7 @@ public class Things {
         System.out.println("final2");
         System.out.println("final");
         System.out.println("final3");
+        System.out.println("weee");
     }
     
 }
