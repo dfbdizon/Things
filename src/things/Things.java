@@ -16,10 +16,7 @@ public class Things {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Hello Food!");
-        System.out.println("Gwen");
-        System.out.println("Faye");
-        System.out.println("Gwen2");
-        System.out.println("Beedo");
+        
         System.out.println("Orange Juice!");
         System.out.println("Finulleey!");
         System.out.println("Orange Bag!");       
