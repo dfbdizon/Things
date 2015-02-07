@@ -17,6 +17,7 @@ public class Things {
     public static void main(String[] args) {
         System.out.println("Gwen");
         System.out.println("Faye");
+        System.out.println("Gwen2");
     }
     
 }
