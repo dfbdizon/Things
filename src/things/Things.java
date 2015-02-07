@@ -17,6 +17,7 @@ public class Things {
         // TODO code application logic here
         System.out.println("Hello Food!");
         System.out.println("Gwen");
+        System.out.println("Faye");
         System.out.println("Gwen2");
         System.out.println("Orange Juice!");
         System.out.println("Orange Bag!");
