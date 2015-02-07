@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package things;
-
 /**
  *
  * @author Faye Dizon
@@ -16,6 +15,7 @@ public class Things {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        System.out.println("Hello Food!");
     }
     
 }
