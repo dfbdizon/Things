@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package things;
-
 /**
  *
  * @author Faye Dizon
@@ -15,6 +14,8 @@ public class Things {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // TODO code application logic here
+        System.out.println("Hello Food!");
         System.out.println("Gwen");
         System.out.println("Gwen2");
     }
