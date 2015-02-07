@@ -21,6 +21,8 @@ public class Things {
         System.out.println("Gwen2");
         System.out.println("Beedo");
         System.out.println("Orange Juice!");
+        System.out.println("Finulleey!");
+        System.out.println("Orange Bag!");       
         System.out.println("Orange Bag!");
         System.out.println("boom");
         
