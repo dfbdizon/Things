@@ -28,6 +28,7 @@ public class Things {
         System.out.println("hey");
         System.out.println("final2");
         System.out.println("final");
+        System.out.println("boom1");
     }
     
 }
