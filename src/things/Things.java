@@ -23,8 +23,10 @@ public class Things {
         System.out.println("Orange Bag!");
         System.out.println("Gwen3");
         System.out.println("Gwen4");
-
+        System.out.println("LAPTOP");
+        System.out.println("BOTTLE");
         System.out.println("boom");
+        System.out.println("helloo");
         System.out.println("hey");
         System.out.println("final2");
         System.out.println("final");
