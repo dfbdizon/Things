@@ -23,7 +23,7 @@ public class User {
         this.password = password;
         this.name = name;
         projects = new ArrayList <Project>();
-        areaOfResponsibilities = new ArrayList <AreaOfResponsibilty>();
+        areaOfResponsibilities = new ArrayList <AreaOfResponsibility>();
     }
 
     public String getUsername() {

@@ -14,19 +14,12 @@ public class Things {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("Hello Food!");
-        System.out.println("Gwen4");
-        System.out.println("LAPTOP");
-        System.out.println("BOTTLE");
-        System.out.println("boom");
-        System.out.println("helloo");
-        System.out.println("hey");
-        System.out.println("final2");
-        System.out.println("final");
-        System.out.println("boom1");
-        System.out.println("final3");
-        System.out.println("weee");
+        /**
+         * TODO:
+         * 
+         * 
+         */
+        
     }
     
 }
