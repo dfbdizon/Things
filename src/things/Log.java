@@ -9,7 +9,7 @@ package things;
  *
  * @author Faye Dizon
  */
-// Unnecessary class -- String of logs already at Logbook clas
+// Unnecessary class -- String of logs already at Logbook class
 public class Log {
     
 }
