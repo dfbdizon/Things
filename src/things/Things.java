@@ -22,11 +22,12 @@ public class Things extends JFrame{
     User currentUser;
     
     public Things() {
-        
         super("Things");
         
         initComponents();
         initLogic();
+        
+        login("imyersupergirl", "ilovesuperman");
     }
     /**
      * @param args the command line arguments
@@ -127,8 +128,8 @@ public class Things extends JFrame{
         
         try{
             Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
-            String SQL = "SELECT USERNAME,PASSWORD FROM USERS WHERE USERNAME='"+username+"' AND PASSWORD='"+password+"'";
-            Statement statement = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            String SQL = "SELECT USERNAME,PASSWORD,NAME FROM USERS WHERE USERNAME='"+username+"' AND PASSWORD='"+password+"'";
+            Statement statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             
             //Querying from DB
             ResultSet resultSet = statement.executeQuery( SQL );
@@ -136,6 +137,7 @@ public class Things extends JFrame{
             if( resultSet.isBeforeFirst() ){
                 resultSet.next();
                 User userLogin = new User(resultSet.getString("USERNAME"), resultSet.getString("PASSWORD"), resultSet.getString("NAME"));
+                System.out.println("Logged in as "+userLogin.getName()+"!");
                 return userLogin;
             }
             
