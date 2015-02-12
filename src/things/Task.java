@@ -20,6 +20,7 @@ public class Task {
     ArrayList listOfTags;
     String notes;
     Calendar deadline;
+    Boolean isDeleted = false;
 
     public Task(String name, Tag tag, String note, Calendar date){
         taskName = name;
@@ -59,5 +60,12 @@ public class Task {
     
     public void addTag(Tag tag){
         listOfTags.add(tag);
+    }
+    
+    public void deleteTask(String taskName){
+      isDeleted = true;
+    }
+    
+    public void createLog(){
     }
 }

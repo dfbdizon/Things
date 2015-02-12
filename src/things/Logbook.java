@@ -19,7 +19,6 @@ public class Logbook {
     ArrayList logList; // Dynamic? OR should is be an Arraylist?
     
     public void printLogs(){
-        
     }
     void createLog(String msg){
         //add a string to logList array

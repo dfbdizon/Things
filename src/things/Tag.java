@@ -44,6 +44,10 @@ public class Tag {
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
+    
+    public void deleteTag(String tagName){
+        
+    }
     /**
      * Tag Table:
      *  
