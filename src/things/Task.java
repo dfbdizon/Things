@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.sql.Date;
 
 /**
  *
@@ -23,36 +24,36 @@ public class Task {
     String taskName;
     ArrayList listOfTags;
     String notes;
-    Calendar deadline;
+    Date deadline;
     boolean isDeleted = false;
 
-    public Task(String name, Tag tag, String note, Calendar date, int type, int headid){
+    public Task(String name, Tag tag, String note, Date date, int type, int headid){
         taskName = name;
         listOfTags = new ArrayList<Tag>();
         listOfTags.add(tag);
         notes = note;
         deadline = date;
+        saveTask(name, note, date, type, headid);
     }
     
-    public boolean saveTask(String name, String note, Calendar date, int type, int headid){
+    public boolean saveTask(String name, String note, Date date, int type, int headid){
         try{
             Connection con = DriverManager.getConnection( Things.getDbHost(), Things.getDbUsername(), Things.getDbPassword() );
-            String SQL = "SELECT COUNT(*) FROM TASKS AS C";
-            Statement statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            int id = 0;
-            //Querying from DB
+            String SQL = "SELECT COUNT(*) FROM TASKS";
+            Statement statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet resultSet = statement.executeQuery( SQL );
-
-            if( resultSet.isBeforeFirst() ){
-                resultSet.next();
-                id = resultSet.getInt("C") + 1;
-            }
             
-            if(id!=0){
-                SQL = "INSERT INTO TASKS VALUES ("+id+", '"+name+"', '"+note+"', '"+date+"', "+type+", "+headid+")";
-            }else{
-                
+            int id = 1;
+
+            if( resultSet.isBeforeFirst()){
+                resultSet.next();
+                id = resultSet.getInt(1) + 1;
             }
+            SQL = "INSERT INTO TASKS VALUES (" + id + ", '" +name+ "', '" +note+ "', '" +date+ "', " +type+ "," +headid+ ")";
+            System.out.println(statement.executeUpdate( SQL ));
+            
+            System.out.println("A task is created.");
+            return true;
             
         }catch(Exception e){
             e.printStackTrace();
@@ -68,7 +69,7 @@ public class Task {
         this.notes = notes;
     }
 
-    public void setDeadline(Calendar deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
@@ -84,7 +85,7 @@ public class Task {
         return notes;
     }
 
-    public Calendar getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
     
