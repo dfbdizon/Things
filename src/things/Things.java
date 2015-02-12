@@ -17,16 +17,18 @@ import java.sql.Statement; //for creating SQL statements
 import java.sql.ResultSet; //for getting table from queries
 import javax.swing.JFrame;
 
-public class Things extends JFrame{
+public class Things{
 
     User currentUser;
+    private javax.swing.JPanel jPanel1;
     
     public Things() {
         
-        super("Things");
+        //super("Things");
         
-        initComponents();
-        initLogic();
+       // initComponents();
+       
+         initLogic();
     }
     /**
      * @param args the command line arguments
@@ -38,17 +40,20 @@ public class Things extends JFrame{
         
          java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Things().setVisible(true);
+                new NewJFrame().setVisible(true);
             }
         });
     }
     
-    public void initComponents(){
+   /* public void initComponents(){
         setSize(400,200);
 	setVisible(true);
 	setResizable(false);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
+        
+        jPanel1 = new javax.swing.JPanel();
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    }*/
     
     public void initLogic(){
      //Setting up host, username, and password
@@ -119,29 +124,5 @@ public class Things extends JFrame{
      * @param password
      * @return 
      */
-    public static User login(String username, String password){
-        
-        String dbHost = "jdbc:derby://localhost:1527/ThingsDB";
-        String dbUsername = "fluxdev";
-        String dbPassword = "1234";
-        
-        try{
-            Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
-            String SQL = "SELECT USERNAME,PASSWORD FROM USERS WHERE USERNAME='"+username+"' AND PASSWORD='"+password+"'";
-            Statement statement = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-            
-            //Querying from DB
-            ResultSet resultSet = statement.executeQuery( SQL );
-
-            if( resultSet.isBeforeFirst() ){
-                resultSet.next();
-                User userLogin = new User(resultSet.getString("USERNAME"), resultSet.getString("PASSWORD"), resultSet.getString("NAME"));
-                return userLogin;
-            }
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return null;
-    }
+ 
 }
