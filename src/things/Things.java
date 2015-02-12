@@ -17,7 +17,7 @@ import java.sql.Statement; //for creating SQL statements
 import java.sql.ResultSet; //for getting table from queries
 
 public class Things{
-
+    
     User currentUser;
 
     
@@ -37,7 +37,7 @@ public class Things{
      */
        
     public static void main(String[] args) {      
-         java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);
             }
