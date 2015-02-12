@@ -15,15 +15,38 @@ import java.sql.DriverManager; //for connecting to DB
 import java.sql.SQLException; //for connecting to DB
 import java.sql.Statement; //for creating SQL statements
 import java.sql.ResultSet; //for getting table from queries
+import javax.swing.JFrame;
 
-public class Things {
-    //Setting up host, username, and password
+public class Things extends JFrame{
+
+    User currentUser;
     private static final String dbHost = "jdbc:derby://localhost:1527/ThingsDB";
     private static final String dbUsername = "fluxdev";
     private static final String dbPassword = "1234";
-    public static void main(String[] args) {        
-        //connecting to the database, start database server for this to work
+    
+    public Things() {
+        super("Things");
         
+        initComponents();
+        initLogic();
+    }       
+    
+    public static void main(String[] args) {      
+         java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Things().setVisible(true);
+            }
+        });
+    }
+    
+    public void initComponents(){
+        setSize(775,700);
+	setVisible(true);
+	setResizable(false);
+	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    public void initLogic(){
         try{
             //Connecting to the database
             Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
@@ -43,7 +66,7 @@ public class Things {
             //Querying from DB
             ResultSet resultSet = statement.executeQuery( SQL );
             
-            while(resultSet.next()){
+            while(resultSet.next()){ //iterated through the rows of the database
                 //Getting contents of the database
                 int taskID = resultSet.getInt("TASKID");
                 String taskName = resultSet.getString("TASKNAME");
@@ -86,5 +109,33 @@ public class Things {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+    
+    /**
+     * This method implements the user login and verification.
+     * @param username
+     * @param password
+     * @return 
+     */
+    public static User login(String username, String password){
+        
+        try{
+            Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
+            String SQL = "SELECT USERNAME,PASSWORD FROM USERS WHERE USERNAME='"+username+"' AND PASSWORD='"+password+"'";
+            Statement statement = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            
+            //Querying from DB
+            ResultSet resultSet = statement.executeQuery( SQL );
+
+            if( resultSet.isBeforeFirst() ){
+                resultSet.next();
+                User userLogin = new User(resultSet.getString("USERNAME"), resultSet.getString("PASSWORD"), resultSet.getString("NAME"));
+                return userLogin;
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }
