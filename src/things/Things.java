@@ -108,4 +108,16 @@ public class Things{
             e.printStackTrace();
         }
     }
+
+    public static String getDbHost() {
+        return dbHost;
+    }
+
+    public static String getDbUsername() {
+        return dbUsername;
+    }
+
+    public static String getDbPassword() {
+        return dbPassword;
+    }
 }

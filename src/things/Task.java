@@ -5,6 +5,10 @@
  */
 package things;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -22,12 +26,38 @@ public class Task {
     Calendar deadline;
     Boolean isDeleted = false;
 
-    public Task(String name, Tag tag, String note, Calendar date){
+    public Task(String name, Tag tag, String note, Calendar date, int type, int headid){
         taskName = name;
         listOfTags = new ArrayList<Tag>();
         listOfTags.add(tag);
         notes = note;
         deadline = date;
+    }
+    
+    public boolean saveTask(String name, String note, Calendar date, int type, int headid){
+        try{
+            Connection con = DriverManager.getConnection( Things.getDbHost(), Things.getDbUsername(), Things.getDbPassword() );
+            String SQL = "SELECT COUNT(*) FROM TASKS AS C";
+            Statement statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            int id = 0;
+            //Querying from DB
+            ResultSet resultSet = statement.executeQuery( SQL );
+
+            if( resultSet.isBeforeFirst() ){
+                resultSet.next();
+                id = resultSet.getInt("C") + 1;
+            }
+            
+            if(id!=0){
+                SQL = "INSERT INTO TASKS VALUES ("+id+", '"+name+"', '"+note+"', '"+date+"', "+type+", "+headid+")";
+            }else{
+                
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
     
     public void setTaskName(String taskName) {
