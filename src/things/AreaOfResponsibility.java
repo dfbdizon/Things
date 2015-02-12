@@ -5,6 +5,8 @@
  */
 package things;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Faye Dizon
@@ -16,16 +18,20 @@ package things;
 * This class has a name, and an array of tasks.
 */
 public class AreaOfResponsibility {
+    int aorID;
     String aorName;
-    Task [] taskList;
-    
+    ArrayList taskList;
+    public AreaOfResponsibility(int aorID, String aorName){
+        this.aorName = aorName;
+        this.aorID = aorID;
+    }
     String getAorName(){
         return(aorName);
     }
     void setAorName(String name){
         aorName = name;
     }
-    Task [] getTaskList(){
+    ArrayList getTaskList(){
         return(taskList);
     }
     void createTask(){

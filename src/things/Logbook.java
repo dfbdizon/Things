@@ -5,6 +5,8 @@
  */
 package things;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Faye Dizon
@@ -14,7 +16,7 @@ package things;
 * This class has an string array of logs.
 */
 public class Logbook {
-    String [] logList; // Dynamic? OR should is be an Arraylist?
+    ArrayList logList; // Dynamic? OR should is be an Arraylist?
     
     public void printLogs(){
         

@@ -60,6 +60,26 @@ public class Things {
                 System.out.println("Notes: " + description);
                 System.out.println("Deadline: " + date + "\n");
             }
+            /*if(projectsIsClicked){
+                String SQL = "SELECT * FROM PROJECTS";
+                Statement statement = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                
+                //Querying from DB
+                resultSet = statement.executeQuery( SQL );
+                Project project; 
+                while(resultSet.next()){
+                    //Getting contents of the database
+                    int projectID = resultSet.getInt("PROJECTID");
+                    String projectName = resultSet.getString("PROJECTNAME");
+                    Date deadline = resultSet.getDate("DEADLINE");
+                    
+                    project = new Project(projectID, projectName, deadline);
+                    System.out.println("Project ID: " + projectID);
+                    System.out.println("Project Name: " + projectName);
+                    System.out.println("Deadline: " + deadline+ "\n");
+                }
+            }
+            */
         }catch(Exception e){
             e.printStackTrace();
         }
