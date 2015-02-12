@@ -124,13 +124,30 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Enter(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Enter
-        System.out.println("Pressed Login!");
+       // System.out.println("Pressed Login!");
         String username = textField1.getText();        
         String password = textField3.getText();
-        System.out.println("Username: " + username);
-        System.out.println("Password: " + password);
+       // System.out.println("Username: " + username);
+       // System.out.println("Password: " + password);
         
         currentUser = login(username, password);
+        if(currentUser == null){
+            System.out.println("Invalid password!");
+            this.dispose();
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new NewJFrame().setVisible(true);
+            }
+        });
+        }else{
+            System.out.println("Log in Successful!");
+            this.dispose();
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new ThingsUI(currentUser).setVisible(true);
+                }
+            });
+        }
     }//GEN-LAST:event_Enter
 
     public User login(String username, String password){
