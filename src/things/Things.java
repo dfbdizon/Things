@@ -35,9 +35,12 @@ public class Things{
      */
     
     
-    
-    public static void main(String[] args) {
+    private static final String dbHost = "jdbc:derby://localhost:1527/ThingsDB";
+    private static final String dbUsername = "fluxdev";
+    private static final String dbPassword = "1234";
         
+    
+    public static void main(String[] args) {      
          java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);
@@ -56,13 +59,6 @@ public class Things{
     }*/
     
     public void initLogic(){
-     //Setting up host, username, and password
-        System.out.println("Hey");
-        String dbHost = "jdbc:derby://localhost:1527/ThingsDB";
-        String dbUsername = "fluxdev";
-        String dbPassword = "1234";
-        
-        //connecting to the database, start database server for this to work
         try{
             //Connecting to the database
             Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
@@ -112,17 +108,47 @@ public class Things{
                     System.out.println("Project Name: " + projectName);
                     System.out.println("Deadline: " + deadline+ "\n");
                 }
+                //display projects in gui
             }
+            */
+            // creating a new project
+            /*
+              if(clikedCreateProject){
+                Project project = new Project();
+                
+              }
             */
         }catch(Exception e){
             e.printStackTrace();
         }
     }
+    
     /**
      * This method implements the user login and verification.
      * @param username
      * @param password
      * @return 
      */
- 
+
+    public static User login(String username, String password){
+        
+        try{
+            Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
+            String SQL = "SELECT USERNAME,PASSWORD FROM USERS WHERE USERNAME='"+username+"' AND PASSWORD='"+password+"'";
+            Statement statement = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            
+            //Querying from DB
+            ResultSet resultSet = statement.executeQuery( SQL );
+
+            if( resultSet.isBeforeFirst() ){
+                resultSet.next();
+                User userLogin = new User(resultSet.getString("USERNAME"), resultSet.getString("PASSWORD"), resultSet.getString("NAME"));
+                return userLogin;
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
