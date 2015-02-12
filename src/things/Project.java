@@ -19,11 +19,13 @@ import java.util.Date;
 * This class has a name, an array of tasks, and a deadline.
 */
 public class Project {
+    int projectID;
     String projectName;
     ArrayList taskList;
     Calendar deadline;
     
-    public Project(String projectName, Date deadline){
+    public Project(int projectID, String projectName, Date deadline){
+        this.projectID = projectID;
         this.projectName = projectName;
         this.deadline.setTime(deadline);
     }
