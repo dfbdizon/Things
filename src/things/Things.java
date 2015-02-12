@@ -100,7 +100,18 @@ public class Things{
             // creating a new project
             /*
               if(clikedCreateProject){
-                Project project = new Project();
+                //get projectName & deadline input
+                try{
+                    con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
+                    SQL = "INSERT INTO PROJECTS(PROJECTNAME, DEADLINE) VALUES ("+ projectName + ", " + deadline + ")";
+                    statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            
+                    //Querying from DB
+                    ResultSet resultSet = statement.executeUpdate( SQL );
+                    System.out.println("Project created in database");
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
                 
               }
             */
