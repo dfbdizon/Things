@@ -20,7 +20,7 @@ public class Task {
     ArrayList listOfTags;
     String notes;
     Calendar deadline;
-    Boolean isDeleted = false;
+    boolean isDeleted = false;
 
     public Task(String name, Tag tag, String note, Calendar date){
         taskName = name;

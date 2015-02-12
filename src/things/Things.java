@@ -76,13 +76,17 @@ public class Things{
                 System.out.println("Notes: " + description);
                 System.out.println("Deadline: " + date + "\n");
             }
-            /*if(projectsIsClicked){
-                String SQL = "SELECT * FROM PROJECTS";
-                Statement statement = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            /*ArrayList projectObjects = new ArrayList<Project>();
+              Project project;
+              String SQL;
+              Statement statement;
+              int projectID;
+              if(projectsIsClicked){
+                SQL = "SELECT * FROM PROJECTS";
+                statement = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 
                 //Querying from DB
                 resultSet = statement.executeQuery( SQL );
-                Project project; 
                 while(resultSet.next()){
                     //Getting contents of the database
                     int projectID = resultSet.getInt("PROJECTID");
@@ -93,25 +97,41 @@ public class Things{
                     System.out.println("Project ID: " + projectID);
                     System.out.println("Project Name: " + projectName);
                     System.out.println("Deadline: " + deadline+ "\n");
+                    projectObjects.add(project);
                 }
+                System.out.println("Project objects created from db");
                 //display projects in gui
             }
             */
             // creating a new project
             /*
               if(clikedCreateProject){
-                //get projectName & deadline input
+                //get projectName & deadline input 
+                //get username
                 try{
                     con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
-                    SQL = "INSERT INTO PROJECTS(PROJECTNAME, DEADLINE) VALUES ("+ projectName + ", " + deadline + ")";
-                    statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             
-                    //Querying from DB
-                    ResultSet resultSet = statement.executeUpdate( SQL );
+                    SQL = "SELECT COUNT (*) FROM PROJECTS WHERE USERNAME ='"+username+"'";
+                    statement = con.createStatement();
+                    projectID = statement.executeQuery( SQL ) + 1;
+            
+                    SQL = "INSERT INTO PROJECTS(PROJECTID, PROJECTNAME, DEADLINE, USERNAME) VALUES ("+ projectID + ", "+projectName + ", " + deadline + ", " + username + ")";
+                    statement = con.createStatement();
+                    statement.executeUpdate( SQL );
                     System.out.println("Project created in database");
+                    
+                    project = new Project(projectID, projectName, deadline);
+                    System.out.println("Project object created");
+                    projectObjects.add(project);
                 }catch(Exception e){
                     e.printStackTrace();
                 }
+                
+              }
+            */
+            // deleting a project
+            /*
+              if(clickedDeleteProject){
                 
               }
             */
