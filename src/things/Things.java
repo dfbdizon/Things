@@ -19,6 +19,8 @@ import javax.swing.JFrame;
 
 public class Things extends JFrame{
 
+    User currentUser;
+    
     public Things() {
         
         super("Things");
@@ -29,6 +31,9 @@ public class Things extends JFrame{
     /**
      * @param args the command line arguments
      */
+    
+    
+    
     public static void main(String[] args) {
         
          java.awt.EventQueue.invokeLater(new Runnable() {
@@ -72,7 +77,7 @@ public class Things extends JFrame{
             //Querying from DB
             ResultSet resultSet = statement.executeQuery( SQL );
             
-            while(resultSet.next()){
+            while(resultSet.next()){ //iterated through the rows of the database
                 //Getting contents of the database
                 int taskID = resultSet.getInt("TASKID");
                 String taskName = resultSet.getString("TASKNAME");
@@ -108,5 +113,35 @@ public class Things extends JFrame{
             e.printStackTrace();
         }
     }
+    /**
+     * This method implements the user login and verification.
+     * @param username
+     * @param password
+     * @return 
+     */
+    public static User login(String username, String password){
+        
+        String dbHost = "jdbc:derby://localhost:1527/ThingsDB";
+        String dbUsername = "fluxdev";
+        String dbPassword = "1234";
+        
+        try{
+            Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
+            String SQL = "SELECT USERNAME,PASSWORD FROM USERS WHERE USERNAME='"+username+"' AND PASSWORD='"+password+"'";
+            Statement statement = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            
+            //Querying from DB
+            ResultSet resultSet = statement.executeQuery( SQL );
 
+            if( resultSet.isBeforeFirst() ){
+                resultSet.next();
+                User userLogin = new User(resultSet.getString("USERNAME"), resultSet.getString("PASSWORD"), resultSet.getString("NAME"));
+                return userLogin;
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
