@@ -17,6 +17,9 @@ import java.sql.Statement;
 public class NewJFrame extends javax.swing.JFrame {
 
     User currentUser;
+    private final String dbHost = "jdbc:derby://localhost:1527/ThingsDB";
+    private final String dbUsername = "fluxdev";
+    private final String dbPassword = "1234";
     
     /**
      * Creates new form NewJFrame
@@ -130,16 +133,12 @@ public class NewJFrame extends javax.swing.JFrame {
         currentUser = login(username, password);
     }//GEN-LAST:event_Enter
 
-    public static User login(String username, String password){
+    public User login(String username, String password){
         
-        String dbHost = "jdbc:derby://localhost:1527/ThingsDB";
-        String dbUsername = "fluxdev";
-        String dbPassword = "1234";
-        
-        try{
+       try{
             Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
-            String SQL = "SELECT USERNAME,PASSWORD FROM USERS WHERE USERNAME='"+username+"' AND PASSWORD='"+password+"'";
-            Statement statement = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            String SQL = "SELECT USERNAME,PASSWORD,NAME FROM USERS WHERE USERNAME='"+username+"' AND PASSWORD='"+password+"'";
+            Statement statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             
             //Querying from DB
             ResultSet resultSet = statement.executeQuery( SQL );
@@ -147,7 +146,7 @@ public class NewJFrame extends javax.swing.JFrame {
             if( resultSet.isBeforeFirst() ){
                 resultSet.next();
                 User userLogin = new User(resultSet.getString("USERNAME"), resultSet.getString("PASSWORD"), resultSet.getString("NAME"));
-                System.out.println("Selected user!");
+                System.out.println("Logged in as "+userLogin.getName()+"!");
                 return userLogin;
             }
             

@@ -44,6 +44,14 @@ public class Tag {
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
+    
+    public void deleteTag(){
+        this.isDeleted = true;
+    }
+    
+    public void createLog(){
+        
+    }
     /**
      * Tag Table:
      *  

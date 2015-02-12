@@ -19,26 +19,23 @@ import java.sql.ResultSet; //for getting table from queries
 public class Things{
 
     User currentUser;
-    private javax.swing.JPanel jPanel1;
+
     
-    public Things() {
-        
-        //super("Things");
-        
-       // initComponents();
-       
+    public Things() { 
          initLogic();
     }
     /**
      * @param args the command line arguments
-     */
-    
-    
+     */    
     private static final String dbHost = "jdbc:derby://localhost:1527/ThingsDB";
     private static final String dbUsername = "fluxdev";
     private static final String dbPassword = "1234";
         
-    
+
+    /**
+     * @param args the command line arguments
+     */
+       
     public static void main(String[] args) {      
          java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -46,16 +43,6 @@ public class Things{
             }
         });
     }
-    
-   /* public void initComponents(){
-        setSize(400,200);
-	setVisible(true);
-	setResizable(false);
-	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        jPanel1 = new javax.swing.JPanel();
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-    }*/
     
     public void initLogic(){
         try{
@@ -128,26 +115,5 @@ public class Things{
      * @param password
      * @return 
      */
-
-    public static User login(String username, String password){
-        
-        try{
-            Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
-            String SQL = "SELECT USERNAME,PASSWORD FROM USERS WHERE USERNAME='"+username+"' AND PASSWORD='"+password+"'";
-            Statement statement = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-            
-            //Querying from DB
-            ResultSet resultSet = statement.executeQuery( SQL );
-
-            if( resultSet.isBeforeFirst() ){
-                resultSet.next();
-                User userLogin = new User(resultSet.getString("USERNAME"), resultSet.getString("PASSWORD"), resultSet.getString("NAME"));
-                return userLogin;
-            }
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return null;
-    }
+    
 }
