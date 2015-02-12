@@ -11,5 +11,43 @@ package things;
  * Searching and organizing tags should be handled for displays and printing.
  */
 public class Tag {
+    int tagID;
+    String tagName;
+    boolean isDeleted;
     
+    public Tag(int tagID, String tagName, boolean isDeleted){
+        this.tagID = tagID;
+        this.tagName = tagName;
+        this.isDeleted = isDeleted;
+    }
+
+    public int getTagID() {
+        return tagID;
+    }
+
+    public void setTagID(int tagID) {
+        this.tagID = tagID;
+    }
+
+    public String getTagName() {
+        return tagName;
+    }
+
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
+    }
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+    /**
+     * Tag Table:
+     *  
+     * 
+     * Task_Tag:
+     */
 }

@@ -1,0 +1,2 @@
+Setting up database server:
+	(1) Add derbyclient.jar to project library
