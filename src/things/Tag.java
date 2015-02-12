@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package things;
-import java.util.Date;
 
 /**
  *
@@ -53,9 +52,8 @@ public class Tag {
     }
     
     public void createLog(String text){
-        Date date = new Date();
-        String msg = this.tagName + text + " " + date.toString();
-        Log log = new Log(7, msg);
+        String msg = this.tagName + text;
+        Log log = new Log(msg);
     }
     /**
      * Tag Table:

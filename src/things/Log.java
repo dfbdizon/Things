@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package things;
+import java.util.Date;
 
 /**
  *
@@ -13,9 +14,9 @@ package things;
 public class Log {
     int logID;
     String logMsg;
-    public Log(int logID, String logMsg){
-        this.logID = logID;
-        this.logMsg = logMsg;
+    public Log(String logMsg){
+        Date date = new Date();
+        this.logMsg = logMsg + " " + date.toString();
     }
     public void printLog(){
         //print logMsg
