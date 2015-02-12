@@ -36,7 +36,7 @@ public class Things{
      * @param args the command line arguments
      */
        
-    public static void main(String[] args) {      
+    public static void main(String[] args) {  
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);
@@ -76,13 +76,17 @@ public class Things{
                 System.out.println("Notes: " + description);
                 System.out.println("Deadline: " + date + "\n");
             }
-            /*if(projectsIsClicked){
-                String SQL = "SELECT * FROM PROJECTS";
-                Statement statement = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            /*ArrayList projectObjects = new ArrayList<Project>();
+              Project project;
+              String SQL;
+              Statement statement;
+              int projectID;
+              if(projectsIsClicked){
+                SQL = "SELECT * FROM PROJECTS";
+                statement = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 
                 //Querying from DB
                 resultSet = statement.executeQuery( SQL );
-                Project project; 
                 while(resultSet.next()){
                     //Getting contents of the database
                     int projectID = resultSet.getInt("PROJECTID");
@@ -93,27 +97,119 @@ public class Things{
                     System.out.println("Project ID: " + projectID);
                     System.out.println("Project Name: " + projectName);
                     System.out.println("Deadline: " + deadline+ "\n");
+                    projectObjects.add(project);
                 }
+                System.out.println("Project objects created from db");
                 //display projects in gui
             }
             */
             // creating a new project
             /*
               if(clikedCreateProject){
-                Project project = new Project();
+                //get projectName & deadline input 
+                //get username
+                try{
+                    con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
+            
+                    SQL = "SELECT COUNT (*) FROM PROJECTS WHERE USERNAME ='"+username+"'";
+                    statement = con.createStatement();
+                    projectID = statement.executeQuery( SQL ) + 1;
+            
+                    SQL = "INSERT INTO PROJECTS(PROJECTID, PROJECTNAME, DEADLINE, USERNAME) VALUES ("+ projectID + ", "+projectName + ", " + deadline + ", " + username + ")";
+                    statement = con.createStatement();
+                    statement.executeUpdate( SQL );
+                    System.out.println("Project created in database");
+                    
+                    project = new Project(projectID, projectName, deadline);
+                    System.out.println("Project object created");
+                    projectObjects.add(project);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
                 
+              }
+            */
+            // deleting a project
+            /*
+              if(clickedDeleteProject){
+                //get project
+                project.deleteProject();
+                projectObjects.remove(project);
+              }
+            */
+            /*ArrayList aorObjects = new ArrayList<AreaOfResponsibility>();
+              AreaOfResponsibility aor;
+              String SQL;
+              Statement statement;
+              int aorID;
+              if(aorsIsClicked){
+                SQL = "SELECT * FROM AORS";
+                statement = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                
+                //Querying from DB
+                resultSet = statement.executeQuery( SQL );
+                while(resultSet.next()){
+                    //Getting contents of the database
+                    int aorID = resultSet.getInt("AORID");
+                    String aorName = resultSet.getString("AORNAME");
+                    
+                    aor = new AreaOfResponsibility(aorID, aorName);
+                    System.out.println("AOR ID: " + aorID);
+                    System.out.println("AOR Name: " + aorName);
+                    aorObjects.add(aor);
+                }
+                System.out.println("AOR objects created from db");
+                //display aors in gui
+            }
+            */
+            // creating a new aor
+            /*
+              if(clikedCreateAOR){
+                //get aorName
+                //get username
+                try{
+                    con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
+            
+                    SQL = "SELECT COUNT (*) FROM AORS WHERE USERNAME ='"+username+"'";
+                    statement = con.createStatement();
+                    aorID = statement.executeQuery( SQL ) + 1;
+            
+                    SQL = "INSERT INTO AORS(AORID, AORNAME, USERNAME) VALUES ("+ aorID + ", "+ aorName + ", " + username + ")";
+                    statement = con.createStatement();
+                    statement.executeUpdate( SQL );
+                    System.out.println("AOR created in database");
+                    
+                    aor = new AreaOfResponsibility(aorID, aorName);
+                    System.out.println("AOR object created");
+                    aorObjects.add(aor);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                
+              }
+            */
+            // deleting an aor
+            /*
+              if(clickedDeleteAOR){
+                //get aor
+                aor.deleteAOR();
+                aorObjects.remove(aor);
               }
             */
         }catch(Exception e){
             e.printStackTrace();
         }
     }
-    
-    /**
-     * This method implements the user login and verification.
-     * @param username
-     * @param password
-     * @return 
-     */
-    
+
+    public static String getDbHost() {
+        return dbHost;
+    }
+
+    public static String getDbUsername() {
+        return dbUsername;
+    }
+
+    public static String getDbPassword() {
+        return dbPassword;
+    }
 }

@@ -6,6 +6,7 @@
 package things;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -21,25 +22,35 @@ public class AreaOfResponsibility {
     int aorID;
     String aorName;
     ArrayList taskList;
+    boolean isDeleted = false;
+    
     public AreaOfResponsibility(int aorID, String aorName){
         this.aorName = aorName;
         this.aorID = aorID;
     }
-    String getAorName(){
+    public String getAorName(){
         return(aorName);
     }
-    void setAorName(String name){
+    public void setAorName(String name){
         aorName = name;
     }
-    ArrayList getTaskList(){
+    public ArrayList getTaskList(){
         return(taskList);
     }
-    void createTask(){
+    public void createTask(){
         // insert code here
         // add params
     }
-    void createLog(Logbook lb, String msg){
-        lb.createLog(msg);
+    //public void createLog(Logbook lb, String msg){
+    //    lb.createLog(msg);
+    //}
+    public void deleteAOR(){
+        isDeleted = true;
+        createLog();
+    }
+    public void createLog(){
+        Date date = new Date();
+        //insert code here
     }
     /*
     * deleteTask()
