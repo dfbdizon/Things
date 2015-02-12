@@ -15,15 +15,44 @@ import java.sql.DriverManager; //for connecting to DB
 import java.sql.SQLException; //for connecting to DB
 import java.sql.Statement; //for creating SQL statements
 import java.sql.ResultSet; //for getting table from queries
+import javax.swing.JFrame;
 
-public class Things {
+public class Things extends JFrame{
 
+    User currentUser;
+    
+    public Things() {
+        
+        super("Things");
+        
+        initComponents();
+        initLogic();
+    }
     /**
      * @param args the command line arguments
      */
+    
+    
+    
     public static void main(String[] args) {
         
-        //Setting up host, username, and password
+         java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Things().setVisible(true);
+            }
+        });
+    }
+    
+    public void initComponents(){
+        setSize(775,700);
+	setVisible(true);
+	setResizable(false);
+	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    public void initLogic(){
+     //Setting up host, username, and password
+        System.out.println("Hey");
         String dbHost = "jdbc:derby://localhost:1527/ThingsDB";
         String dbUsername = "fluxdev";
         String dbPassword = "1234";
@@ -48,7 +77,7 @@ public class Things {
             //Querying from DB
             ResultSet resultSet = statement.executeQuery( SQL );
             
-            while(resultSet.next()){
+            while(resultSet.next()){ //iterated through the rows of the database
                 //Getting contents of the database
                 int taskID = resultSet.getInt("TASKID");
                 String taskName = resultSet.getString("TASKNAME");
@@ -83,5 +112,36 @@ public class Things {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+    /**
+     * This method implements the user login and verification.
+     * @param username
+     * @param password
+     * @return 
+     */
+    public static User login(String username, String password){
+        
+        String dbHost = "jdbc:derby://localhost:1527/ThingsDB";
+        String dbUsername = "fluxdev";
+        String dbPassword = "1234";
+        
+        try{
+            Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
+            String SQL = "SELECT USERNAME,PASSWORD FROM USERS WHERE USERNAME='"+username+"' AND PASSWORD='"+password+"'";
+            Statement statement = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            
+            //Querying from DB
+            ResultSet resultSet = statement.executeQuery( SQL );
+
+            if( resultSet.isBeforeFirst() ){
+                resultSet.next();
+                User userLogin = new User(resultSet.getString("USERNAME"), resultSet.getString("PASSWORD"), resultSet.getString("NAME"));
+                return userLogin;
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }
