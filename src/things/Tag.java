@@ -19,6 +19,7 @@ public class Tag {
         this.tagID = tagID;
         this.tagName = tagName;
         this.isDeleted = isDeleted;
+        createLog(" is created.")
     }
 
     public int getTagID() {
@@ -47,10 +48,12 @@ public class Tag {
     
     public void deleteTag(){
         this.isDeleted = true;
+        createLog(" is deleted.")
     }
     
-    public void createLog(){
-        
+    public void createLog(String text){
+        String msg = this.tagName + text
+        Log log = new Log()
     }
     /**
      * Tag Table:
