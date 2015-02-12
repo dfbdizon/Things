@@ -132,7 +132,9 @@ public class Things{
             // deleting a project
             /*
               if(clickedDeleteProject){
-                
+                //get project
+                project.deleteProject();
+                projectObjects.remove(project);
               }
             */
             /*ArrayList aorObjects = new ArrayList<AreaOfResponsibility>();
@@ -189,7 +191,9 @@ public class Things{
             // deleting an aor
             /*
               if(clickedDeleteAOR){
-                
+                //get aor
+                aor.deleteAOR();
+                aorObjects.remove(aor);
               }
             */
         }catch(Exception e){
