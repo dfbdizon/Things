@@ -45,8 +45,8 @@ public class Tag {
         this.isDeleted = isDeleted;
     }
     
-    public void deleteTag(String tagName){
-        
+    public void deleteTag(){
+        this.isDeleted = true;
     }
     /**
      * Tag Table:
