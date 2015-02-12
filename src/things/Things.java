@@ -48,7 +48,7 @@ public class Things {
             //Querying from DB
             ResultSet resultSet = statement.executeQuery( SQL );
             
-            while(resultSet.next()){
+            while(resultSet.next()){ //iterated through the rows of the database
                 //Getting contents of the database
                 int taskID = resultSet.getInt("TASKID");
                 String taskName = resultSet.getString("TASKNAME");
