@@ -44,7 +44,7 @@ public class Things extends JFrame{
     }
     
     public void initComponents(){
-        setSize(775,700);
+        setSize(400,200);
 	setVisible(true);
 	setResizable(false);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
