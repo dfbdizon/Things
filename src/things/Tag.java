@@ -48,6 +48,10 @@ public class Tag {
     public void deleteTag(){
         this.isDeleted = true;
     }
+    
+    public void createLog(){
+        
+    }
     /**
      * Tag Table:
      *  
