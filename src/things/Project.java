@@ -5,7 +5,9 @@
  */
 package things;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -18,8 +20,13 @@ import java.util.Calendar;
 */
 public class Project {
     String projectName;
-    Task [] taskList;
+    ArrayList taskList;
     Calendar deadline;
+    
+    public Project(String projectName, Date deadline){
+        this.projectName = projectName;
+        this.deadline.setTime(deadline);
+    }
     
     String getProjectName(){
         return(projectName);
@@ -27,7 +34,7 @@ public class Project {
     void setProjectName(String name){
         projectName = name;
     }
-    Task [] getTaskList(){
+    ArrayList getTaskList(){
         return(taskList);
     }
     void createTask(){
