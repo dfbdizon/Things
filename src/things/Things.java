@@ -15,23 +15,44 @@ import java.sql.DriverManager; //for connecting to DB
 import java.sql.SQLException; //for connecting to DB
 import java.sql.Statement; //for creating SQL statements
 import java.sql.ResultSet; //for getting table from queries
+import javax.swing.JFrame;
 
-public class Things {
+public class Things extends JFrame{
 
+    User currentUser;
+    
+    public Things() {
+        
+        super("Things");
+        
+        initComponents();
+        initLogic();
+    }
     /**
      * @param args the command line arguments
      */
     
-    User currentUser;
-    
-    public Things(){
-        
-    }
     
     
     public static void main(String[] args) {
         
-        //Setting up host, username, and password
+         java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Things().setVisible(true);
+            }
+        });
+    }
+    
+    public void initComponents(){
+        setSize(775,700);
+	setVisible(true);
+	setResizable(false);
+	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    public void initLogic(){
+     //Setting up host, username, and password
+        System.out.println("Hey");
         String dbHost = "jdbc:derby://localhost:1527/ThingsDB";
         String dbUsername = "fluxdev";
         String dbPassword = "1234";
@@ -92,8 +113,6 @@ public class Things {
             e.printStackTrace();
         }
     }
-    
-    
     /**
      * This method implements the user login and verification.
      * @param username
