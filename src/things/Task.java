@@ -31,7 +31,7 @@ public class Task {
     ArrayList listOfTags;
     String notes;
     Date deadline;
-    int taskId=0;
+    int taskId = 0;
     boolean isDeleted = false;
 
     public Task(String name, String note, Date date, int type, int headid){
