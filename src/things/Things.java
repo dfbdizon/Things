@@ -27,7 +27,6 @@ public class Things extends JFrame{
         initComponents();
         initLogic();
         
-        login("imyersupergirl", "ilovesuperman");
     }
     /**
      * @param args the command line arguments
