@@ -23,6 +23,7 @@ public class Project {
     String projectName;
     ArrayList taskList;
     Calendar deadline;
+    boolean isDeleted = false;
     
     public Project(int projectID, String projectName, Date deadline){
         this.projectID = projectID;
@@ -30,24 +31,32 @@ public class Project {
         this.deadline.setTime(deadline);
     }
     
-    String getProjectName(){
+    public String getProjectName(){
         return(projectName);
     }
-    void setProjectName(String name){
+    public void setProjectName(String name){
         projectName = name;
     }
-    ArrayList getTaskList(){
+    public ArrayList getTaskList(){
         return(taskList);
     }
-    void createTask(){
+    public void createTask(){
         //insert code here
         //add params
     }
-    Calendar getDeadline(){
+    public Calendar getDeadline(){
         return(deadline);
     }
-    void createLog(Logbook lb, String msg){
+    public void createLog(Logbook lb, String msg){
         lb.createLog(msg);
+    }
+    public void deleteProject(){
+        isDeleted = true;
+        createLog();
+    }
+    public void createLog(){
+        Date date = new Date();
+        //insert code here
     }
     /*
     * deleteTask()
