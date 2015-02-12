@@ -17,18 +17,13 @@ import java.sql.Statement; //for creating SQL statements
 import java.sql.ResultSet; //for getting table from queries
 
 public class Things {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
-        //Setting up host, username, and password
-        String dbHost = "jdbc:derby://localhost:1527/ThingsDB";
-        String dbUsername = "fluxdev";
-        String dbPassword = "1234";
-        
+    //Setting up host, username, and password
+    private static final String dbHost = "jdbc:derby://localhost:1527/ThingsDB";
+    private static final String dbUsername = "fluxdev";
+    private static final String dbPassword = "1234";
+    public static void main(String[] args) {        
         //connecting to the database, start database server for this to work
+        
         try{
             //Connecting to the database
             Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
@@ -78,7 +73,15 @@ public class Things {
                     System.out.println("Project Name: " + projectName);
                     System.out.println("Deadline: " + deadline+ "\n");
                 }
+                //display projects in gui
             }
+            */
+            // creating a new project
+            /*
+              if(clikedCreateProject){
+                Project project = new Project();
+                
+              }
             */
         }catch(Exception e){
             e.printStackTrace();
