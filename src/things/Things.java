@@ -44,6 +44,7 @@ public class Things {
             
             String SQL = "SELECT * FROM TASKS";
             Statement statement = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            
             //Querying from DB
             ResultSet resultSet = statement.executeQuery( SQL );
             
