@@ -12,10 +12,9 @@ package things;
 import java.sql.Connection; //for connecting to DB
 import java.sql.Date;
 import java.sql.DriverManager; //for connecting to DB
-import java.sql.SQLException; //for connecting to DB
+//import java.sql.SQLException; //for connecting to DB
 import java.sql.Statement; //for creating SQL statements
 import java.sql.ResultSet; //for getting table from queries
-import javax.swing.JFrame;
 
 public class Things{
 
