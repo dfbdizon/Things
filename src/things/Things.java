@@ -108,12 +108,4 @@ public class Things{
             e.printStackTrace();
         }
     }
-    
-    /**
-     * This method implements the user login and verification.
-     * @param username
-     * @param password
-     * @return 
-     */
-    
 }
