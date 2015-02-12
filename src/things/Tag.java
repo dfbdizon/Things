@@ -11,5 +11,10 @@ package things;
  * Searching and organizing tags should be handled for displays and printing.
  */
 public class Tag {
-    
+    /**
+     * Tag Table:
+     *  
+     * 
+     * Task_Tag:
+     */
 }
