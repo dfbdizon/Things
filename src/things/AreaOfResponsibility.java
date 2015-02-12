@@ -18,10 +18,12 @@ import java.util.ArrayList;
 * This class has a name, and an array of tasks.
 */
 public class AreaOfResponsibility {
+    int aorID;
     String aorName;
     ArrayList taskList;
-    public AreaOfResponsibility(String aorName){
+    public AreaOfResponsibility(int aorID, String aorName){
         this.aorName = aorName;
+        this.aorID = aorID;
     }
     String getAorName(){
         return(aorName);

@@ -11,5 +11,13 @@ package things;
  */
 // Unnecessary class -- String of logs already at Logbook class
 public class Log {
-    
+    int logID;
+    String logMsg;
+    public Log(int logID, String logMsg){
+        this.logID = logID;
+        this.logMsg = logMsg;
+    }
+    public void printLog(){
+        //print logMsg
+    }
 }
