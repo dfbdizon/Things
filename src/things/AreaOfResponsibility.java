@@ -27,6 +27,7 @@ public class AreaOfResponsibility {
     public AreaOfResponsibility(int aorID, String aorName){
         this.aorName = aorName;
         this.aorID = aorID;
+        createLog(1);
     }
     public String getAorName(){
         return(aorName);
@@ -44,13 +45,14 @@ public class AreaOfResponsibility {
     //public void createLog(Logbook lb, String msg){
     //    lb.createLog(msg);
     //}
-    public void deleteAOR(){
+    public void deleteAOR(int logID){
         isDeleted = true;
-        createLog();
+        createLog(0);
     }
-    public void createLog(){
-        Date date = new Date();
-        //insert code here
+    public void createLog(int type){
+        Log log;
+        if(type == 0) log = new Log(getAorName() + "has been deleted");
+        else log = new Log(getAorName() + "has been created");
     }
     /*
     * deleteTask()

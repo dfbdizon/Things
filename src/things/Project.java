@@ -29,6 +29,7 @@ public class Project {
         this.projectID = projectID;
         this.projectName = projectName;
         this.deadline.setTime(deadline);
+        createLog(1);
     }
     
     public String getProjectName(){
@@ -50,13 +51,14 @@ public class Project {
     public void createLog(Logbook lb, String msg){
         lb.createLog(msg);
     }
-    public void deleteProject(){
+    public void deleteProject(int logID){
         isDeleted = true;
-        createLog();
+        createLog(0);
     }
-    public void createLog(){
-        Date date = new Date();
-        //insert code here
+    public void createLog(int type){
+        Log log;
+        if(type == 0) log = new Log(getProjectName() + "has been deleted");
+        else log = new Log(getProjectName() + "has been created");
     }
     /*
     * deleteTask()
