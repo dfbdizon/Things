@@ -5,6 +5,8 @@
  */
 package things;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author user
@@ -291,7 +293,8 @@ public class ThingsUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addNewAOR
 
     private void viewAllProject(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllProject
-        System.out.println("View All Project!");
+        System.out.println("View All Projects!");
+        ArrayList projectObjects = Things.getProjects();
     }//GEN-LAST:event_viewAllProject
 
     private void addNewProject(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewProject

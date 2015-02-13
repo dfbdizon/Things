@@ -51,8 +51,8 @@ public class AreaOfResponsibility {
     }
     public void createLog(int type){
         Log log;
-        if(type == 0) log = new Log(getAorName() + "has been deleted");
-        else log = new Log(getAorName() + "has been created");
+        if(type == 0) log = new Log(getAORName() + "has been deleted");
+        else log = new Log(getAORName() + "has been created");
     }
     /*
     * deleteTask()

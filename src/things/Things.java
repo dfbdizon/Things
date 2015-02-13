@@ -124,7 +124,6 @@ public class Things{
         int projectID;
         try{
             Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
-            con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
             
             SQL = "SELECT COUNT (*) FROM PROJECTS WHERE USERNAME ='"+currentUser.getUsername()+"'";
             statement = con.createStatement();
@@ -181,7 +180,6 @@ public class Things{
         int aorID;
         try{
             Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
-            con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
             
             SQL = "SELECT COUNT (*) FROM AORS WHERE USERNAME ='"+currentUser.getUsername()+"'";
             statement = con.createStatement();
