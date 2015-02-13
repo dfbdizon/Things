@@ -50,12 +50,13 @@ public class Project {
     public void createLog(Logbook lb, String msg){
         lb.createLog(msg);
     }
-    public void deleteProject(){
+    public void deleteProject(int logID){
         isDeleted = true;
-        createLog();
+        createLog(logID);
     }
-    public void createLog(){
+    public void createLog(int logID){
         Date date = new Date();
+        Log log = new Log(logID, getProjectName() + "has been deleted" + date.toString());
         //insert code here
     }
     /*

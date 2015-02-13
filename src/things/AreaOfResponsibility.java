@@ -44,14 +44,14 @@ public class AreaOfResponsibility {
     //public void createLog(Logbook lb, String msg){
     //    lb.createLog(msg);
     //}
-    public void deleteAOR(){
+    public void deleteAOR(int logID){
         isDeleted = true;
-        createLog();
+        createLog(logID);
     }
-    public void createLog(){
+    public void createLog(int logID){
         Date date = new Date();
-        //insert code here
-    }
+        Log log = new Log(logID, getAorName() + "has been deleted" + date.toString());
+        /
     /*
     * deleteTask()
     */
