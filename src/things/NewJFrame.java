@@ -141,6 +141,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }else{
             System.out.println("Log in Successful!");
             Things.createProjectList();
+            Things.createAORList();
             this.dispose();
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {

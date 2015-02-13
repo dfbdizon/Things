@@ -27,7 +27,7 @@ public class AreaOfResponsibility {
     public AreaOfResponsibility(int aorID, String aorName){
         this.aorName = aorName;
         this.aorID = aorID;
-        createLog(1);
+        //createLog(1);
     }
     public String getAORName(){
         return(aorName);
