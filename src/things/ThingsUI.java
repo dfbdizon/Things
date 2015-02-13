@@ -262,10 +262,7 @@ public class ThingsUI extends javax.swing.JFrame {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Description"
@@ -331,10 +328,7 @@ public class ThingsUI extends javax.swing.JFrame {
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Description", "Due Date"
@@ -396,8 +390,6 @@ public class ThingsUI extends javax.swing.JFrame {
                 .addContainerGap(410, Short.MAX_VALUE))
         );
 
-        label5.getAccessibleContext().setAccessibleName("Project Name: ");
-
         jTabbedPane1.addTab("Projects", jPanel3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -407,7 +399,7 @@ public class ThingsUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -487,12 +479,15 @@ public class ThingsUI extends javax.swing.JFrame {
        Task task;
        ArrayList tasks = Things.getTasks(1, ((int)evt.getItem())+1);
        DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
+       model.fireTableDataChanged();
        for(int i = 0; i < tasks.size(); i++){
            task = (Task)tasks.get(i);
            model.addRow(new Object[]{task.taskId, task.taskName, task.description, task.deadline});
+           System.out.println("getting task...");
        } 
-       System.out.println(evt.paramString());      
-       System.out.println(evt.getItem());
+       System.out.println(evt.paramString());
+       System.out.println("boom");
+       jTable4.setModel(model);
     }//GEN-LAST:event_list1ItemStateChanged
 
     private void viewAllTasksAOR(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllTasksAOR
