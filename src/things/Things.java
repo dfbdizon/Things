@@ -15,10 +15,13 @@ import java.sql.DriverManager; //for connecting to DB
 //import java.sql.SQLException; //for connecting to DB
 import java.sql.Statement; //for creating SQL statements
 import java.sql.ResultSet; //for getting table from queries
+import java.util.ArrayList; 
 
 public class Things{
     
     private static User currentUser;
+    private static ArrayList projectObjects = new ArrayList<Project>();
+    private static ArrayList aorObjects = new ArrayList<AreaOfResponsibility>();
 
     
     public Things() { 
@@ -78,67 +81,6 @@ public class Things{
                 System.out.println("Notes: " + description);
                 System.out.println("Deadline: " + date + "\n");
             }
-            /*ArrayList projectObjects = new ArrayList<Project>();
-              Project project;
-              String SQL;
-              Statement statement;
-              int projectID;
-              if(projectsIsClicked){
-                SQL = "SELECT * FROM PROJECTS";
-                statement = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                
-                //Querying from DB
-                resultSet = statement.executeQuery( SQL );
-                while(resultSet.next()){
-                    //Getting contents of the database
-                    int projectID = resultSet.getInt("PROJECTID");
-                    String projectName = resultSet.getString("PROJECTNAME");
-                    Date deadline = resultSet.getDate("DEADLINE");
-                    
-                    project = new Project(projectID, projectName, deadline);
-                    System.out.println("Project ID: " + projectID);
-                    System.out.println("Project Name: " + projectName);
-                    System.out.println("Deadline: " + deadline+ "\n");
-                    projectObjects.add(project);
-                }
-                System.out.println("Project objects created from db");
-                //display projects in gui
-            }
-            */
-            // creating a new project
-            /*
-              if(clikedCreateProject){
-                //get projectName & deadline input 
-                //get username
-                try{
-                    con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
-            
-                    SQL = "SELECT COUNT (*) FROM PROJECTS WHERE USERNAME ='"+username+"'";
-                    statement = con.createStatement();
-                    projectID = statement.executeQuery( SQL ).getInt(1) + 1;
-            
-                    SQL = "INSERT INTO PROJECTS(PROJECTID, PROJECTNAME, DEADLINE, USERNAME) VALUES ("+ projectID + ", "+projectName + ", " + deadline + ", " + username + ")";
-                    statement = con.createStatement();
-                    statement.executeUpdate( SQL );
-                    System.out.println("Project created in database");
-                    
-                    project = new Project(projectID, projectName, deadline);
-                    System.out.println("Project object created");
-                    projectObjects.add(project);
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-                
-              }
-            */
-            // deleting a project
-            /*
-              if(clickedDeleteProject){
-                //get project
-                project.deleteProject();
-                projectObjects.remove(project);
-              }
-            */
             /*ArrayList aorObjects = new ArrayList<AreaOfResponsibility>();
               AreaOfResponsibility aor;
               String SQL;
@@ -201,6 +143,64 @@ public class Things{
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+    public static void createProjectList(){
+        Project project;
+        String SQL;
+        Statement statement;
+        int projectID;
+        try{
+            Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
+            SQL = "SELECT * FROM PROJECTS";
+            statement = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                
+            //Querying from DB
+            ResultSet resultSet = statement.executeQuery( SQL );
+            while(resultSet.next()){
+                //Getting contents of the database
+                projectID = resultSet.getInt("PROJECTID");
+                String projectName = resultSet.getString("PROJECTNAME");
+                Date deadline = resultSet.getDate("DEADLINE");
+                    
+                project = new Project(projectID, projectName, deadline);
+                projectObjects.add(project);
+                System.out.println("Project ID: " + projectID);
+                System.out.println("Project Name: " + projectName);
+                System.out.println("Deadline: " + deadline+ "\n");
+            }
+            System.out.println("Project objects created from db");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void createProject(String projectName, Date deadline){
+        Project project;
+        String SQL;
+        Statement statement;
+        int projectID;
+        try{
+            Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
+            con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
+            
+            SQL = "SELECT COUNT (*) FROM PROJECTS WHERE USERNAME ='"+currentUser.getUsername()+"'";
+            statement = con.createStatement();
+            projectID = statement.executeQuery( SQL ).getInt(1) + 1;
+            
+            SQL = "INSERT INTO PROJECTS(PROJECTID, PROJECTNAME, DEADLINE, USERNAME) VALUES ("+ projectID + ", "+projectName + ", " + deadline + ", " + currentUser.getUsername() + ")";
+            statement = con.createStatement();
+            statement.executeUpdate( SQL );
+            System.out.println("Project created in database");
+                    
+            project = new Project(projectID, projectName, deadline);
+            System.out.println("Project object created");
+            projectObjects.add(project);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void deleteProject(Project project){
+        project.deleteProject(0);
+        projectObjects.remove(project);
     }
     public static User getUser(){
         return currentUser;

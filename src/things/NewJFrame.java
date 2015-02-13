@@ -146,6 +146,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     new ThingsUI(currentUser).setVisible(true);
                 }
             });
+            Things.createProjectList();
         }
     }//GEN-LAST:event_Enter
 
