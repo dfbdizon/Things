@@ -83,9 +83,15 @@ public class Things{
             e.printStackTrace();
         }
     }
+    
+    public static ArrayList getTask(int type, int headid){
+        return Task.getTasks(type, headid);
+    }
+    
     public static ArrayList getProjects(){
         return projectObjects;
     }
+    
     public static void createProjectList(){
         Project project;
         String SQL;

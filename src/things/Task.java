@@ -40,6 +40,15 @@ public class Task {
         
     }
 
+    /**
+     * 
+     * @param id //-1 when the task is not yet saved in the database
+     * @param name
+     * @param description
+     * @param date
+     * @param type
+     * @param headid 
+     */
     Task(int id, String name, String description, Date date, int type, int headid){
         this.taskName = name;
         this.listOfTags = new ArrayList();
