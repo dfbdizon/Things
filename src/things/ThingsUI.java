@@ -6,6 +6,7 @@
 package things;
 
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -437,7 +438,14 @@ public class ThingsUI extends javax.swing.JFrame {
     }//GEN-LAST:event_list1ActionPerformed
 
     private void list1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_list1ItemStateChanged
-       System.out.println(evt.paramString());
+       System.out.println(evt.getItem());
+       Task task;
+       ArrayList tasks = Things.getTasks(1, ((int)evt.getItem())+1);
+       DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
+       for(int i = 0; i < tasks.size(); i++){
+           task = (Task)tasks.get(i);
+           model.addRow(new Object[]{task.taskId, task.taskName, task.description, task.deadline});
+       }       
     }//GEN-LAST:event_list1ItemStateChanged
 
     
