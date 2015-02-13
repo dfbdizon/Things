@@ -29,41 +29,51 @@ public class Task {
     
     String taskName;
     ArrayList listOfTags;
-    String note;
+    String description;
     Date deadline;
-    int taskId=0;
+    int taskId;
     int type;
     int headid;
     boolean isDeleted = false;
-
-    public Task(String name, String note, Date date, int type, int headid){
-        taskName = name;
-        listOfTags = new ArrayList();
-        note = note;
-        deadline = date;
+    
+    Task(){
         
-        try{
-            con =DriverManager.getConnection( Things.getDbHost(), Things.getDbUsername(), Things.getDbPassword() );
-            statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            
-            //Setting taskId for Task
-            SQL = "SELECT COUNT(*) FROM TASKS";
-            resultSet = statement.executeQuery( SQL );
-            if( resultSet.isBeforeFirst()){
-                resultSet.next();
-                taskId = resultSet.getInt(1) + 1;
-            }else{
-                taskId = 1;
+    }
+
+    Task(int id, String name, String description, Date date, int type, int headid){
+        this.taskName = name;
+        this.listOfTags = new ArrayList();
+        this.description = description;
+        this.deadline = date;
+        this.type = type;
+        this.headid = headid;
+        
+        if(id <0){ //negative id for saving tasks
+            try{
+                con =DriverManager.getConnection( Things.getDbHost(), Things.getDbUsername(), Things.getDbPassword() );
+                statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+                //Setting taskId for Task
+                SQL = "SELECT COUNT(*) FROM TASKS";
+                resultSet = statement.executeQuery( SQL );
+                if( resultSet.isBeforeFirst()){
+                    resultSet.next();
+                    this.taskId = resultSet.getInt(1) + 1;
+                }else{
+                    this.taskId = 1;
+                }
+            }catch(Exception e){
+                e.printStackTrace();
             }
-        }catch(Exception e){
-            e.printStackTrace();
+        }else{ //non negative id for loading tasks
+            this.taskId = id;
         }
     }
     
     /**
      * 
      * @param name
-     * @param note
+     * @param description
      * @param date
      * @param type
      * @param headid
@@ -72,7 +82,7 @@ public class Task {
     public boolean saveTask(){
         try{
             SQL = "INSERT INTO TASKS (TASKID, TASKNAME, DESCRIPTION, DEADLINE, TASKTYPE, HEADID) VALUES (" + taskId
-                    + ", '" +taskName+ "', '" +note+ "', '" +deadline+ "', " +type+ "," +headid+ ")";
+                    + ", '" +taskName+ "', '" +description+ "', '" +deadline+ "', " +type+ "," +headid+ ")";
             System.out.println(statement.executeUpdate( SQL ));
             
             System.out.println("A task is created.");
@@ -101,6 +111,42 @@ public class Task {
         }
         return false;
     }
+    
+    /**
+     * 
+     * @param type - if project or aor
+     * @param headid - project id or aor id
+     * @return 
+     */
+    public static ArrayList getTasks(int type, int headid){
+        ArrayList listOfTasks = new ArrayList <Task>();
+        
+        try{
+            Connection connect = DriverManager.getConnection( Things.getDbHost(), Things.getDbUsername(), Things.getDbPassword() );
+            String query = "SELECT * FROM TASKS WHERE TYPE="+type+" AND HEADID="+headid;
+            Statement stmt = connect.createStatement();
+            ResultSet set = stmt.executeQuery( query );
+            
+            while(set.next()){
+                boolean deleted = set.getBoolean("ISDELETED"); //if deleted, do not display
+                if(!deleted){
+                    int id = set.getInt("TASKID");
+                    String name = set.getString("TASKNAME");
+                    String desc = set.getString("DESCRIPTION");
+                    Date deadline = set.getDate("DEADLINE");
+                    int ttype = set.getInt("TASKTYPE");
+                    int hid = set.getInt("HEADID");
+                    
+                    Task task = new Task(id, name, desc, deadline, ttype, hid);
+                    listOfTasks.add(task);
+                }
+            }
+        }catch(SQLException esql){
+            esql.printStackTrace();
+        }
+        
+        return listOfTasks;
+    }
 
     public String getTaskName() {
         return taskName;
@@ -111,7 +157,7 @@ public class Task {
     }
 
     public String getDescription() {
-        return note;
+        return description;
     }
 
     public Date getDeadline() {
