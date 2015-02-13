@@ -126,9 +126,6 @@
           <Properties>
             <Property name="label" type="java.lang.String" value="Log In"/>
           </Properties>
-          <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Log In"/>
-          </AccessibilityProperties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Enter"/>
           </Events>

@@ -29,15 +29,17 @@ public class Task {
     
     String taskName;
     ArrayList listOfTags;
-    String notes;
+    String note;
     Date deadline;
     int taskId=0;
+    int type;
+    int headid;
     boolean isDeleted = false;
 
     public Task(String name, String note, Date date, int type, int headid){
         taskName = name;
         listOfTags = new ArrayList();
-        notes = note;
+        note = note;
         deadline = date;
         
         try{
@@ -56,9 +58,6 @@ public class Task {
         }catch(Exception e){
             e.printStackTrace();
         }
-        
-        //Saving task to database
-        saveTask(name, note, date, type, headid);
     }
     
     /**
@@ -70,10 +69,10 @@ public class Task {
      * @param headid
      * @return 
      */
-    public boolean saveTask(String name, String note, Date date, int type, int headid){
+    public boolean saveTask(){
         try{
             SQL = "INSERT INTO TASKS (TASKID, TASKNAME, DESCRIPTION, DEADLINE, TASKTYPE, HEADID) VALUES (" + taskId
-                    + ", '" +name+ "', '" +note+ "', '" +date+ "', " +type+ "," +headid+ ")";
+                    + ", '" +taskName+ "', '" +note+ "', '" +deadline+ "', " +type+ "," +headid+ ")";
             System.out.println(statement.executeUpdate( SQL ));
             
             System.out.println("A task is created.");
@@ -111,8 +110,8 @@ public class Task {
         return listOfTags;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getDescription() {
+        return note;
     }
 
     public Date getDeadline() {
