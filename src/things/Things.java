@@ -144,6 +144,9 @@ public class Things{
             e.printStackTrace();
         }
     }
+    public static ArrayList getProjects(){
+        return projectObjects;
+    }
     public static void createProjectList(){
         Project project;
         String SQL;
