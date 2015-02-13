@@ -123,10 +123,11 @@ public class Task {
         
         try{
             Connection connect = DriverManager.getConnection( Things.getDbHost(), Things.getDbUsername(), Things.getDbPassword() );
-            String query = "SELECT * FROM TASKS WHERE TYPE="+type+" AND HEADID="+headid;
-            Statement stmt = connect.createStatement();
+            String query = "SELECT * FROM TASKS WHERE TASKTYPE="+type+" AND HEADID="+headid;
+            Statement stmt = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet set = stmt.executeQuery( query );
             
+            set.beforeFirst();
             while(set.next()){
                 boolean deleted = set.getBoolean("ISDELETED"); //if deleted, do not display
                 if(!deleted){
