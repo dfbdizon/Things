@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.sql.Date;
+import java.sql.SQLException;
 
 /**
  *
@@ -21,35 +22,58 @@ import java.sql.Date;
  * Log is created when a new task is created.
  */
 public class Task {
+    Connection con;
+    String SQL;
+    Statement statement;
+    ResultSet resultSet;
+    
     String taskName;
     ArrayList listOfTags;
     String notes;
     Date deadline;
+    int taskId = 0;
     boolean isDeleted = false;
 
-    public Task(String name, Tag tag, String note, Date date, int type, int headid){
+    public Task(String name, String note, Date date, int type, int headid){
         taskName = name;
-        listOfTags = new ArrayList<Tag>();
-        listOfTags.add(tag);
+        listOfTags = new ArrayList();
         notes = note;
         deadline = date;
+        
+        try{
+            con =DriverManager.getConnection( Things.getDbHost(), Things.getDbUsername(), Things.getDbPassword() );
+            statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            
+            //Setting taskId for Task
+            SQL = "SELECT COUNT(*) FROM TASKS";
+            resultSet = statement.executeQuery( SQL );
+            if( resultSet.isBeforeFirst()){
+                resultSet.next();
+                taskId = resultSet.getInt(1) + 1;
+            }else{
+                taskId = 1;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        //Saving task to database
         saveTask(name, note, date, type, headid);
     }
     
+    /**
+     * 
+     * @param name
+     * @param note
+     * @param date
+     * @param type
+     * @param headid
+     * @return 
+     */
     public boolean saveTask(String name, String note, Date date, int type, int headid){
         try{
-            Connection con = DriverManager.getConnection( Things.getDbHost(), Things.getDbUsername(), Things.getDbPassword() );
-            String SQL = "SELECT COUNT(*) FROM TASKS";
-            Statement statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ResultSet resultSet = statement.executeQuery( SQL );
-            
-            int id = 1;
-
-            if( resultSet.isBeforeFirst()){
-                resultSet.next();
-                id = resultSet.getInt(1) + 1;
-            }
-            SQL = "INSERT INTO TASKS VALUES (" + id + ", '" +name+ "', '" +note+ "', '" +date+ "', " +type+ "," +headid+ ")";
+            SQL = "INSERT INTO TASKS (TASKID, TASKNAME, DESCRIPTION, DEADLINE, TASKTYPE, HEADID) VALUES (" + taskId
+                    + ", '" +name+ "', '" +note+ "', '" +date+ "', " +type+ "," +headid+ ")";
             System.out.println(statement.executeUpdate( SQL ));
             
             System.out.println("A task is created.");
@@ -61,16 +85,22 @@ public class Task {
         return false;
     }
     
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
+    /**
+     * 
+     * @return 
+     */
+    public boolean deleteTask(){
+        isDeleted = true;
+        
+        SQL = "UPDATE TASKS SET ISDELETED = true WHERE TASKID = " + taskId;
+        try{
+            statement.executeUpdate(SQL);
+            System.out.println("IsDeleted updated!");
+            return true;
+        }catch(SQLException esql){
+            esql.printStackTrace();
+        }
+        return false;
     }
 
     public String getTaskName() {
