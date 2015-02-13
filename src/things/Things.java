@@ -18,7 +18,7 @@ import java.sql.ResultSet; //for getting table from queries
 
 public class Things{
     
-    User currentUser;
+    private static User currentUser;
 
     
     public Things() { 
@@ -113,7 +113,7 @@ public class Things{
             
                     SQL = "SELECT COUNT (*) FROM PROJECTS WHERE USERNAME ='"+username+"'";
                     statement = con.createStatement();
-                    projectID = statement.executeQuery( SQL ) + 1;
+                    projectID = statement.executeQuery( SQL ).getInt(1) + 1;
             
                     SQL = "INSERT INTO PROJECTS(PROJECTID, PROJECTNAME, DEADLINE, USERNAME) VALUES ("+ projectID + ", "+projectName + ", " + deadline + ", " + username + ")";
                     statement = con.createStatement();
@@ -172,7 +172,7 @@ public class Things{
             
                     SQL = "SELECT COUNT (*) FROM AORS WHERE USERNAME ='"+username+"'";
                     statement = con.createStatement();
-                    aorID = statement.executeQuery( SQL ) + 1;
+                    aorID = statement.executeQuery( SQL ).getInt(1) + 1;
             
                     SQL = "INSERT INTO AORS(AORID, AORNAME, USERNAME) VALUES ("+ aorID + ", "+ aorName + ", " + username + ")";
                     statement = con.createStatement();
@@ -200,7 +200,9 @@ public class Things{
             e.printStackTrace();
         }
     }
-
+    public static User getUser(){
+        return currentUser;
+    }
     public static String getDbHost() {
         return dbHost;
     }
