@@ -98,6 +98,17 @@ public class ThingsUI extends javax.swing.JFrame {
             }
         });
 
+        list1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                list1ItemStateChanged(evt);
+            }
+        });
+        list1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                list1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -416,6 +427,18 @@ public class ThingsUI extends javax.swing.JFrame {
     private void addNewProject(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewProject
         System.out.println("Add New Project");
     }//GEN-LAST:event_addNewProject
+
+    private void list1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_list1ActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Clicked list");
+        
+       //list1.addItemListener(this);
+       
+    }//GEN-LAST:event_list1ActionPerformed
+
+    private void list1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_list1ItemStateChanged
+       System.out.println(evt.paramString());
+    }//GEN-LAST:event_list1ItemStateChanged
 
     
     /**
