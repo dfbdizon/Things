@@ -37,6 +37,8 @@ public class Things{
      */
        
     public static void main(String[] args) {  
+        Task task= new Task("Finish Things", "ASAP", new Date(2015, 2, 17), 1, 1234);
+        System.out.println(task.saveTask());
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);

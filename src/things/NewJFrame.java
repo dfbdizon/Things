@@ -171,6 +171,10 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         return null;
     }
+    
+    public void logout(){
+        //set current user to null, free everything
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button button1;
