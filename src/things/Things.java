@@ -40,19 +40,6 @@ public class Things{
      */
        
     public static void main(String[] args) {  
-        Task task= new Task(-1, "Finish Things", "ASAP", new Date(2015, 2, 17), 1, 1234);
-        
-        ArrayList tasks = Task.getTasks(2, 123456);
-        Task currentTask;
-        int index = 0;
-        
-        while(index < tasks.size()){
-            currentTask = (Task) tasks.get(index);
-            System.out.println(currentTask.getTaskName());
-            index++;
-        }
-        
-        System.out.println(task.saveTask());
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);
