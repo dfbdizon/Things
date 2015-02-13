@@ -20,13 +20,15 @@ import java.sql.SQLException;
  */
 // Unnecessary class -- String of logs already at Logbook class
 public class Log {
-    Connection con;
-    String SQL;
-    Statement statement;
-    ResultSet resultSet;
+    String dbHost;
+    String dbUsername;
+    String dbPassword;
     
     int logID;
     String logMsg;
+    String SQL;
+    Statement statement;
+    Connection con;
     
     public Log(String logMsg){
         Date date = new Date();
@@ -35,6 +37,16 @@ public class Log {
         try{
             con =DriverManager.getConnection( Things.getDbHost(), Things.getDbUsername(), Things.getDbPassword() );
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            User user = Things.getUser();
+            
+            SQL = "SELECT COUNT (*) FROM LOGBOOK WHERE USERNAME ='"+user.getUsername()+"'";
+            statement = con.createStatement();
+            logID = statement.executeQuery( SQL ).getInt(1) + 1;
+            
+            SQL = "INSERT INTO LOGBOOK(LOGID, LOG, USERNAME) VALUES ("+ logID + ", "+ logMsg + ", " + user.getUsername() + ")";
+            statement = con.createStatement();
+            statement.executeUpdate( SQL );
+            System.out.println("Log created in database");
             //Setting taskId for Task
         /*    SQL = "SELECT COUNT(*) FROM TAGS";
             resultSet = statement.executeQuery( SQL );

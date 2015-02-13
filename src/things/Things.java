@@ -15,10 +15,13 @@ import java.sql.DriverManager; //for connecting to DB
 //import java.sql.SQLException; //for connecting to DB
 import java.sql.Statement; //for creating SQL statements
 import java.sql.ResultSet; //for getting table from queries
+import java.util.ArrayList; 
 
 public class Things{
     
-    User currentUser;
+    private static User currentUser;
+    private static ArrayList projectObjects = new ArrayList<Project>();
+    private static ArrayList aorObjects = new ArrayList<AreaOfResponsibility>();
 
     
     public Things() { 
@@ -37,6 +40,8 @@ public class Things{
      */
        
     public static void main(String[] args) {  
+        Task task= new Task("Finish Things", "ASAP", new Date(2015, 2, 17), 1, 1234);
+        System.out.println(task.saveTask());
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);
@@ -76,131 +81,129 @@ public class Things{
                 System.out.println("Notes: " + description);
                 System.out.println("Deadline: " + date + "\n");
             }
-            /*ArrayList projectObjects = new ArrayList<Project>();
-              Project project;
-              String SQL;
-              Statement statement;
-              int projectID;
-              if(projectsIsClicked){
-                SQL = "SELECT * FROM PROJECTS";
-                statement = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                
-                //Querying from DB
-                resultSet = statement.executeQuery( SQL );
-                while(resultSet.next()){
-                    //Getting contents of the database
-                    int projectID = resultSet.getInt("PROJECTID");
-                    String projectName = resultSet.getString("PROJECTNAME");
-                    Date deadline = resultSet.getDate("DEADLINE");
-                    
-                    project = new Project(projectID, projectName, deadline);
-                    System.out.println("Project ID: " + projectID);
-                    System.out.println("Project Name: " + projectName);
-                    System.out.println("Deadline: " + deadline+ "\n");
-                    projectObjects.add(project);
-                }
-                System.out.println("Project objects created from db");
-                //display projects in gui
-            }
-            */
-            // creating a new project
-            /*
-              if(clikedCreateProject){
-                //get projectName & deadline input 
-                //get username
-                try{
-                    con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
-            
-                    SQL = "SELECT COUNT (*) FROM PROJECTS WHERE USERNAME ='"+username+"'";
-                    statement = con.createStatement();
-                    projectID = statement.executeQuery( SQL ) + 1;
-            
-                    SQL = "INSERT INTO PROJECTS(PROJECTID, PROJECTNAME, DEADLINE, USERNAME) VALUES ("+ projectID + ", "+projectName + ", " + deadline + ", " + username + ")";
-                    statement = con.createStatement();
-                    statement.executeUpdate( SQL );
-                    System.out.println("Project created in database");
-                    
-                    project = new Project(projectID, projectName, deadline);
-                    System.out.println("Project object created");
-                    projectObjects.add(project);
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-                
-              }
-            */
-            // deleting a project
-            /*
-              if(clickedDeleteProject){
-                //get project
-                project.deleteProject();
-                projectObjects.remove(project);
-              }
-            */
-            /*ArrayList aorObjects = new ArrayList<AreaOfResponsibility>();
-              AreaOfResponsibility aor;
-              String SQL;
-              Statement statement;
-              int aorID;
-              if(aorsIsClicked){
-                SQL = "SELECT * FROM AORS";
-                statement = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                
-                //Querying from DB
-                resultSet = statement.executeQuery( SQL );
-                while(resultSet.next()){
-                    //Getting contents of the database
-                    int aorID = resultSet.getInt("AORID");
-                    String aorName = resultSet.getString("AORNAME");
-                    
-                    aor = new AreaOfResponsibility(aorID, aorName);
-                    System.out.println("AOR ID: " + aorID);
-                    System.out.println("AOR Name: " + aorName);
-                    aorObjects.add(aor);
-                }
-                System.out.println("AOR objects created from db");
-                //display aors in gui
-            }
-            */
-            // creating a new aor
-            /*
-              if(clikedCreateAOR){
-                //get aorName
-                //get username
-                try{
-                    con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
-            
-                    SQL = "SELECT COUNT (*) FROM AORS WHERE USERNAME ='"+username+"'";
-                    statement = con.createStatement();
-                    aorID = statement.executeQuery( SQL ) + 1;
-            
-                    SQL = "INSERT INTO AORS(AORID, AORNAME, USERNAME) VALUES ("+ aorID + ", "+ aorName + ", " + username + ")";
-                    statement = con.createStatement();
-                    statement.executeUpdate( SQL );
-                    System.out.println("AOR created in database");
-                    
-                    aor = new AreaOfResponsibility(aorID, aorName);
-                    System.out.println("AOR object created");
-                    aorObjects.add(aor);
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-                
-              }
-            */
-            // deleting an aor
-            /*
-              if(clickedDeleteAOR){
-                //get aor
-                aor.deleteAOR();
-                aorObjects.remove(aor);
-              }
-            */
         }catch(Exception e){
             e.printStackTrace();
         }
     }
-
+    public static ArrayList getProjects(){
+        return projectObjects;
+    }
+    public static void createProjectList(){
+        Project project;
+        String SQL;
+        Statement statement;
+        int projectID;
+        try{
+            Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
+            SQL = "SELECT * FROM PROJECTS";
+            statement = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                
+            //Querying from DB
+            ResultSet resultSet = statement.executeQuery( SQL );
+            while(resultSet.next()){
+                //Getting contents of the database
+                projectID = resultSet.getInt("PROJECTID");
+                String projectName = resultSet.getString("PROJECTNAME");
+                Date deadline = resultSet.getDate("DEADLINE");
+                    
+                project = new Project(projectID, projectName, deadline);
+                projectObjects.add(project);
+                System.out.println("Project ID: " + projectID);
+                System.out.println("Project Name: " + projectName);
+                System.out.println("Deadline: " + deadline+ "\n");
+            }
+            System.out.println("Project objects created from db");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void createProject(String projectName, Date deadline){
+        Project project;
+        String SQL;
+        Statement statement;
+        int projectID;
+        try{
+            Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
+            
+            SQL = "SELECT COUNT (*) FROM PROJECTS WHERE USERNAME ='"+currentUser.getUsername()+"'";
+            statement = con.createStatement();
+            projectID = statement.executeQuery( SQL ).getInt(1) + 1;
+            
+            SQL = "INSERT INTO PROJECTS(PROJECTID, PROJECTNAME, DEADLINE, USERNAME) VALUES ("+ projectID + ", "+projectName + ", " + deadline + ", " + currentUser.getUsername() + ")";
+            statement = con.createStatement();
+            statement.executeUpdate( SQL );
+            System.out.println("Project created in database");
+                    
+            project = new Project(projectID, projectName, deadline);
+            System.out.println("Project object created");
+            projectObjects.add(project);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    
+    public static ArrayList getAORs(){
+        return aorObjects;
+    }
+    public static void createAORList(){
+        AreaOfResponsibility aor;
+        String SQL;
+        Statement statement;
+        int aorID;
+        try{
+            Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
+            SQL = "SELECT * FROM AORS";
+            statement = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                
+            //Querying from DB
+            ResultSet resultSet = statement.executeQuery( SQL );
+            while(resultSet.next()){
+                //Getting contents of the database
+                aorID = resultSet.getInt("AORID");
+                String aorName = resultSet.getString("AORNAME");
+                    
+                aor = new AreaOfResponsibility(aorID, aorName);
+                aorObjects.add(aor);
+                System.out.println("AOR ID: " + aorID);
+                System.out.println("AOR Name: " + aorName);
+            }
+            System.out.println("AOR objects created from db");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void createAOR(String aorName){
+        AreaOfResponsibility aor;
+        String SQL;
+        Statement statement;
+        int aorID;
+        try{
+            Connection con = DriverManager.getConnection( dbHost, dbUsername, dbPassword );
+            
+            SQL = "SELECT COUNT (*) FROM AORS WHERE USERNAME ='"+currentUser.getUsername()+"'";
+            statement = con.createStatement();
+            aorID = statement.executeQuery( SQL ).getInt(1) + 1;
+            
+            SQL = "INSERT INTO AORS(AORID, AORNAME, USERNAME) VALUES ("+ aorID + ", "+aorName + ", " + currentUser.getUsername() + ")";
+            statement = con.createStatement();
+            statement.executeUpdate( SQL );
+            System.out.println("AOR created in database");
+                    
+            aor = new AreaOfResponsibility(aorID, aorName);
+            System.out.println("AOR object created");
+            aorObjects.add(aor);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void deleteAOR(AreaOfResponsibility aor){
+        aor.deleteAOR(0);
+        projectObjects.remove(aor);
+    }
+    public static User getUser(){
+        return currentUser;
+    }
     public static String getDbHost() {
         return dbHost;
     }

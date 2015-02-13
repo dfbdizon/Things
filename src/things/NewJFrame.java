@@ -140,6 +140,7 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         }else{
             System.out.println("Log in Successful!");
+            Things.createProjectList();
             this.dispose();
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
@@ -170,6 +171,10 @@ public class NewJFrame extends javax.swing.JFrame {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public void logout(){
+        //set current user to null, free everything
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
