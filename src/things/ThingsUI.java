@@ -294,7 +294,12 @@ public class ThingsUI extends javax.swing.JFrame {
 
     private void viewAllProject(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllProject
         System.out.println("View All Projects!");
+        Project project;
         ArrayList projectObjects = Things.getProjects();
+        for(int i = 0; i < projectObjects.size(); i++){
+            project = (Project)projectObjects.get(i);
+            list1.add(project.getProjectName());
+        }
     }//GEN-LAST:event_viewAllProject
 
     private void addNewProject(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewProject

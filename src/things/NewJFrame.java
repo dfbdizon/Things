@@ -140,13 +140,13 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         }else{
             System.out.println("Log in Successful!");
+            Things.createProjectList();
             this.dispose();
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     new ThingsUI(currentUser).setVisible(true);
                 }
             });
-            Things.createProjectList();
         }
     }//GEN-LAST:event_Enter
 
