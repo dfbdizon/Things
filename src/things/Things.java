@@ -84,7 +84,7 @@ public class Things{
         }
     }
     
-    public static ArrayList getTask(int type, int headid){
+    public static ArrayList getTasks(int type, int headid){
         return Task.getTasks(type, headid);
     }
     
