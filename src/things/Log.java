@@ -39,9 +39,14 @@ public class Log {
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             User user = Things.getUser();
             
-            SQL = "SELECT COUNT (*) FROM PROJECTS WHERE USERNAME ='"+user.getUsername()+"'";
+            SQL = "SELECT COUNT (*) FROM LOGBOOK WHERE USERNAME ='"+user.getUsername()+"'";
             statement = con.createStatement();
             logID = statement.executeQuery( SQL ).getInt(1) + 1;
+            
+            SQL = "INSERT INTO LOGBOOK(LOGID, LOG, USERNAME) VALUES ("+ logID + ", "+ logMsg + ", " + user.getUsername() + ")";
+            statement = con.createStatement();
+            statement.executeUpdate( SQL );
+            System.out.println("Log created in database");
             //Setting taskId for Task
         /*    SQL = "SELECT COUNT(*) FROM TAGS";
             resultSet = statement.executeQuery( SQL );
