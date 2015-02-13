@@ -29,10 +29,10 @@ public class AreaOfResponsibility {
         this.aorID = aorID;
         createLog(1);
     }
-    public String getAorName(){
+    public String getAORName(){
         return(aorName);
     }
-    public void setAorName(String name){
+    public void setAORName(String name){
         aorName = name;
     }
     public ArrayList getTaskList(){
