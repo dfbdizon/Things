@@ -14,6 +14,8 @@ import java.util.ArrayList;
 public class ThingsUI extends javax.swing.JFrame {
 
     User currentUser;
+    boolean aorsViewed = false;
+    boolean projectsViewed = false;
     
     /**
      * Creates new form ThingsUI
@@ -383,6 +385,15 @@ public class ThingsUI extends javax.swing.JFrame {
 
     private void viewAllAOR(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllAOR
         System.out.println("View All AOR!");
+        if(!aorsViewed){
+            AreaOfResponsibility aor;
+            ArrayList aorObjects = Things.getAORs();
+            for(int i = 0; i < aorObjects.size(); i++){
+                aor = (AreaOfResponsibility)aorObjects.get(i);
+                list2.add(aor.getAORName());
+            }
+            aorsViewed = true;
+        }
     }//GEN-LAST:event_viewAllAOR
 
     private void addNewAOR(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewAOR
@@ -391,11 +402,14 @@ public class ThingsUI extends javax.swing.JFrame {
 
     private void viewAllProject(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllProject
         System.out.println("View All Projects!");
-        Project project;
-        ArrayList projectObjects = Things.getProjects();
-        for(int i = 0; i < projectObjects.size(); i++){
-            project = (Project)projectObjects.get(i);
-            list1.add(project.getProjectName());
+        if(!projectsViewed){
+            Project project;
+            ArrayList projectObjects = Things.getProjects();
+            for(int i = 0; i < projectObjects.size(); i++){
+                project = (Project)projectObjects.get(i);
+                list1.add(project.getProjectName());
+            }
+            projectsViewed = true;
         }
     }//GEN-LAST:event_viewAllProject
 

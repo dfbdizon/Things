@@ -8,6 +8,7 @@ package things;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -22,14 +23,14 @@ public class Project {
     int projectID;
     String projectName;
     ArrayList taskList;
-    Calendar deadline;
+    Calendar deadline = new GregorianCalendar();
     boolean isDeleted = false;
     
     public Project(int projectID, String projectName, Date deadline){
         this.projectID = projectID;
         this.projectName = projectName;
         this.deadline.setTime(deadline);
-        createLog(1);
+        //createLog(1);
     }
     
     public String getProjectName(){
