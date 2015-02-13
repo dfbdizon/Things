@@ -39,18 +39,22 @@ public class ThingsUI extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         label1 = new java.awt.Label();
-        jSeparator2 = new javax.swing.JSeparator();
         jButton3 = new javax.swing.JButton();
-        list1 = new java.awt.List();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jSeparator4 = new javax.swing.JSeparator();
         jPanel5 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         label2 = new java.awt.Label();
         jSeparator3 = new javax.swing.JSeparator();
         jButton4 = new javax.swing.JButton();
-        list2 = new java.awt.List();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Things");
@@ -86,34 +90,49 @@ public class ThingsUI extends javax.swing.JFrame {
             }
         });
 
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Name", "Description"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable2);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jSeparator2)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(list1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 225, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
-                .addContainerGap())
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(0, 225, Short.MAX_VALUE)
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addComponent(jSeparator4)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(list1, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -139,6 +158,19 @@ public class ThingsUI extends javax.swing.JFrame {
             }
         });
 
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Name", "Description"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable3);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -157,7 +189,7 @@ public class ThingsUI extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(list2, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel5Layout.setVerticalGroup(
@@ -173,10 +205,12 @@ public class ThingsUI extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(35, 35, 35)
-                    .addComponent(list2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(49, Short.MAX_VALUE)))
+                    .addGap(54, 54, 54)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                    .addGap(54, 54, 54)))
         );
+
+        label2.getAccessibleContext().setAccessibleName("Area of Responsibilities");
 
         jButton5.setText("Logbook");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -230,19 +264,31 @@ public class ThingsUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setRequestFocusEnabled(false);
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 548, Short.MAX_VALUE)
+            .addGap(0, 507, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 592, Short.MAX_VALUE)
+            .addGap(0, 568, Short.MAX_VALUE)
         );
+
+        jTabbedPane1.addTab("Projects", jPanel3);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 507, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 568, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Area of Responsibility", jPanel6);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -250,21 +296,26 @@ public class ThingsUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
+
+        jTabbedPane1.getAccessibleContext().setAccessibleName("Projects");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,13 +325,13 @@ public class ThingsUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void viewLogbook(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewLogbook
-        System.out.println("Display Logbook!");
-    }//GEN-LAST:event_viewLogbook
-
     private void viewTrash(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTrash
         System.out.println("Display Trash!");
     }//GEN-LAST:event_viewTrash
+
+    private void viewLogbook(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewLogbook
+        System.out.println("Display Logbook!");
+    }//GEN-LAST:event_viewLogbook
 
     private void viewAllAOR(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllAOR
         System.out.println("View All AOR!");
@@ -296,10 +347,9 @@ public class ThingsUI extends javax.swing.JFrame {
 
     private void addNewProject(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewProject
         System.out.println("Add New Project");
-        
-        list1.add("Gwen");
     }//GEN-LAST:event_addNewProject
 
+    
     /**
      * @param args the command line arguments
      */
@@ -320,12 +370,16 @@ public class ThingsUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     private java.awt.Label label1;
     private java.awt.Label label2;
-    private java.awt.List list1;
-    private java.awt.List list2;
     // End of variables declaration//GEN-END:variables
 }
